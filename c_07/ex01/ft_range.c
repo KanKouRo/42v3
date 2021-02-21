@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_power.c                               :+:      :+:    :+:   */
+/*   ft_range.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/18 09:51:33 by ngomis            #+#    #+#             */
-/*   Updated: 2021/02/21 12:36:04 by ngomis           ###   ########.fr       */
+/*   Created: 2021/02/21 14:12:25 by ngomis            #+#    #+#             */
+/*   Updated: 2021/02/21 16:29:41 by ngomis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_recursive_power(int nb, int power)
-{
-	int nbr;
+#include <stdlib.h>
 
-	nbr = 1;
-	if (power == 0)
-		return (1);
-	if (power < 0)
+int		*ft_range(int min, int max)
+{
+	int *tab;
+
+	if (min >= max)
+		return (NULL);
+	tab = malloc(sizeof(int) * (max - min));
+	if (tab == NULL)
 		return (0);
-	if (power > 0)
-		nbr = nb * ft_recursive_power(nb, power - 1);
-	return (nbr);
+	while (min < max)
+		*tab++ = min++;
+	return (tab);
 }

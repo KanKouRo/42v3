@@ -6,7 +6,7 @@
 /*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 14:18:31 by ngomis            #+#    #+#             */
-/*   Updated: 2021/02/17 16:45:06 by ngomis           ###   ########.fr       */
+/*   Updated: 2021/02/20 09:59:02 by ngomis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ int	ft_iterative_factorial(int nb)
 	int i;
 	int nbr;
 
-	nbr = 1;	
+	nbr = 1;
 	i = 0;
 	if (nb < 0)
 		return (0);
