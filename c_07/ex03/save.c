@@ -23,45 +23,54 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strcpy(char *dest, char *src)
+char	*ft_allocate(int size, char **strs, char *sep)
 {
 	int i;
+	int nb_char;
 
+	nb_char = 1;
 	i = 0;
-	while (src[i] != '\0')
+	while(i < size)
 	{
-		dest[i] = src[i];
+		if (i == 0)
+			nb_char = nb_char +ft_strlen(strs[i]);
+		else
+			nb_char = nb_char + ft_strlen(sep) + ft_strlen(strs[i]);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
-}	
+	return (malloc(sizeof(char) * nb_char));
+}
 
 char	*ft_strjoin(int size, char **strs, char *sep)
 {
-	char *dest;
 	int i;
 	int j;
+	int n;
+	char *dest;
+	char *str;
 
+	dest = ft_allocate(size, strs, sep);
 	i = 0;
-	j = 0;
-	while (i < size)
-		j += ft_strlen(strs[i++]);
-	if (size > 0)
-		j += (size - 1) * ft_strlen(sep);
-	if (!(dest = malloc(sizeof(char) *(j + 1))));
-		
-	if (!dest)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (i < size)
+	n = 0;
+	while(i < size)
 	{
-		ft_strcpy(dest + j, strs[i]);
-		j += ft_strlen(strs[i]);
-		if (i++ < size)
-			j += dest + j + ft_strlen(sep) - ft_strcpy(dest + j, sep);
+		j = 0;
+		if (i != 0)
+			while (sep[j] != '\0')
+				dest[n++] = sep[j++];
+		j = 0;
+		str = strs[i];
+		while(str[j] != '\0')
+			dest[n++] = str[j++];
+		i++;
 	}
-	dest[j] = '\0';
+	dest[n] = '\0';
 	return (dest);
+}
+
+int main(void)
+{
+	char strs[] = "hello";
+    printf("%s", ft_strjoin(20, *strs, "-"));
+	return (0);
 }
