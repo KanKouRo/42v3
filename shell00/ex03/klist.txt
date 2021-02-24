@@ -1,0 +1,5 @@
+Credentials cache: API:5D43350E-5A93-4353-B8C1-345F6A6F5A9B
+        Principal: ngomis@42.FR
+
+  Issued                Expires               Principal
+Feb  1 14:54:19 2021  Feb  8 14:54:11 2021  krbtgt/42.FR@42.FR
