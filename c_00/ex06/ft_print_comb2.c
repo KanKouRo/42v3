@@ -12,50 +12,34 @@
 
 #include <unistd.h>
 
-void	ft_put_num2(char a, char b, char c, char *d)
+void	ft_putchar(char c)
 {
-	write(1, &a, 1);
-	write(1, &b, 1);
-	write(1, " ", 1);
 	write(1, &c, 1);
-	write(1, d, 1);
-	if (a != '9' || b != '8')
-	{
-		write(1, ",", 1);
-		write(1, " ", 1);
-	}
-	*d = *d + 1;
 }
 
 void	ft_print_comb2(void)
 {
 	char a;
 	char b;
-	char c;
-	char d;
 
-	a = '0';
-	while (a <= '9')
+	a = 0;
+	b = 1;
+	while (a < 99)
 	{
-		b = '0';
-		while (b <= '7')
-		{
-			c = a;
-			while (c <= '9')
-			{
-				d = (b + 1);
-				while (d <= '9')
-					ft_put_num2(a, b, c, &d);
-				c++;
-			}
-			b++;
-		}
-		a++;
+		ft_putchar(a / 10 + '0');
+		ft_putchar(a % 10 + '0');
+		ft_putchar(' ');
+		ft_putchar(b / 10 + '0');
+		ft_putchar(b % 10 + '0');
+		if (a < 98)
+			write(1, ", ", 2);
+		if (++b > 99)
+			b = ++a + 1;
 	}
-	write(1, "98 99", 5);
 }
 
 int main(void)
 {
 	ft_print_comb2();
+	return (0);
 }

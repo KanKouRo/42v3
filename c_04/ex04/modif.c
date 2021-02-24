@@ -69,8 +69,10 @@ void	ft_putnbr_base(int nbr, char *base)
 	}
 }
 
-int main ()
+int main (int argc, char ** argv)
 {
-	ft_putnbr_base(256, "0123456789ABCDEF");
+	(void) argc;
+	(void) argv;
+	ft_putnbr_base(12, argv[1]);
 	return (0);
 }

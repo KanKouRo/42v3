@@ -38,3 +38,11 @@ void	ft_putnbr(int nb)
 		ft_putnbr(nb % 10);
 	}
 }
+
+int main(int argc, char **argv)
+{
+	(void) argc;
+	(void) argv;
+	ft_putnbr(argv[1]);
+	return (0);
+}
