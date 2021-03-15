@@ -1,0 +1,24 @@
+Ex01:
+groups $FT_USER | tr " " "," | tr -d '\r\n'
+
+Ex02:
+find . -type f -name "*.sh" | rev | cut -c 4- | cut -d '/' -f1 | rev
+
+Ex03:
+find . -type f -o -type d | wc -l | tr -d ' '
+
+Ex04:
+ifconfig | grep "ether*" | tr -d ' ' | tr -d '\t' | cut -c 6-42
+
+Ex05: fonctionne pas demande de l'aide
+
+dd if=/dev/zero of=\"\\\?\$\*\'MaRViN\'\*\$\?\\\" bs=1 count=2
+vim marvin, écrire "42" dedans et mettre les commandes en dessus
+:s/\( \|\t\)*$//
+:s/\n//
+dd if=/dev/zero of=test3 bs=1 count=1
+chmod 614 marvin
+touch -t 202110021221 marvin
+
+Ex06:
+ls -l | awk "NR%2==1"
