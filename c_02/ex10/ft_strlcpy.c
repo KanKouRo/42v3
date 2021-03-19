@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_atoi.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/16 11:09:51 by ngomis            #+#    #+#             */
-/*   Updated: 2021/02/16 15:34:35 by ngomis           ###   ########.fr       */
+/*   Created: 2021/03/15 13:59:46 by ngomis            #+#    #+#             */
+/*   Updated: 2021/03/17 14:42:02 by ngomis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int ft_atoi(char *str);
-#include <stdio.h>
-int main(void)
+
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
-	printf("%d", ft_atoi("   '\n' ---+-- +-+p3234ab567"));
-	return (0);
+	unsigned int i;
+	unsigned int l;
+
+	i = 0;
+	while (src[i] != '\0' && i + 1 < size)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	if (size > 0)
+		dest[i] = '\0';
+	l = 0;
+	while (src[l])
+		l++;
+	return (l);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/15 12:27:20 by ngomis            #+#    #+#             */
-/*   Updated: 2021/02/20 13:55:47 by ngomis           ###   ########.fr       */
+/*   Created: 2021/03/16 15:30:43 by ngomis            #+#    #+#             */
+/*   Updated: 2021/03/16 15:36:24 by ngomis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,29 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putnbr(int nb)
+void	base_hexa(unsigned char c)
 {
-	if (nb >= 0 && nb < 10)
-		ft_putchar(nb + '0');
-	else if (nb == -2147483648)
+	char *base;
+
+	base = "0123456789abcdef";
+	ft_putchar(base[c / 16]);
+	ft_putchar(base[c % 16]);
+}
+
+void	ft_putstr_non_printable(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
 	{
-		ft_putchar('-');
-		ft_putnbr(2);
-		ft_putnbr(147483648);
-	}
-	else if (nb < 0)
-	{
-		ft_putchar('-');
-		ft_putnbr(nb * (-1));
-	}
-	else
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		if (str[i] >= 32 && str[i] <= 126)
+			ft_putchar(str[i]);
+		else
+		{
+			write(1, "\\str[i]", 1);
+			base_hexa(str[i]);
+		}
+		i++;
 	}
 }

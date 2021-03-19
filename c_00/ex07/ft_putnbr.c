@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ngomis <ngomis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 09:49:30 by ngomis            #+#    #+#             */
-/*   Updated: 2021/02/08 10:08:22 by ngomis           ###   ########.fr       */
+/*   Updated: 2021/03/18 16:36:37 by ngomis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,25 @@ void	ft_putchar(char c)
 
 void	ft_putnbr(int nb)
 {
-	if (nb >= 0 && nb < 10)
-		ft_putchar(nb + '0');
-	else if (nb == -2147483648)
+	long int n;
+
+	n = nb;
+	if (n < 0)
 	{
 		ft_putchar('-');
-		ft_putnbr(2);
-		ft_putnbr(147483648);
+		n *= (-1);
 	}
-	else if (nb < 0)
+	if (n > 9)
 	{
-		ft_putchar('-');
-		ft_putnbr(nb * (-1));
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
 	}
-	else
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
-	}
+	else 
+		ft_putchar(n + '0');
 }
 
-int main(int argc, char **argv)
+int main()
 {
-	(void) argc;
-	(void) argv;
-	ft_putnbr(argv[1]);
+	ft_putnbr(-2147483648);
 	return (0);
 }
