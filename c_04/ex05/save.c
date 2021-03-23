@@ -6,7 +6,7 @@
 /*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:02:10 by ngomis            #+#    #+#             */
-/*   Updated: 2021/03/23 16:01:20 by ngomis           ###   ########.fr       */
+/*   Updated: 2021/03/23 15:04:06 by ngomis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,45 +62,53 @@ int		ft_erreur(char *base)
 	}
 	return (0);
 }
-
-int		ft_erreur2(char *str, char *base)
+/*
+void	ft_putnbr(unsigned int n, char *base, unsigned int size)
 {
-	int i;
-	int j;
-	
-	i = 0;
-	while (str[i] != '\0')
+	if (n > size - 1)
 	{
-		j = 0;
-		while(str[i] != base[j])
-		{
-			if (base[j] == '\0')
-				return (1);
-			j++;
-		}
-		i++;
+		ft_putnbr(n / size, base, size);
+		n %= size;
 	}
-	return (0);
 }
 
+void	ft_putnbr_base(int nbr, char *base)
+{
+	unsigned int	i;
+	int				size;
+
+	size = 0;
+	i = 0;
+	while (base[size] != '\0')
+		size++;
+	if (ft_erreur(base) == 1)
+		return ;
+	if (nbr < 0)
+	{
+		ft_putnbr(-nbr, base, size);
+	}
+	else
+	{
+		ft_putnbr(nbr, base, size);
+	}
+}
+*/
 int		ft_atoi_base(char *str, char *base)
 {
 	long int			i;
 	unsigned int		size;
 
 	size = 0;
-	if ((ft_erreur(base) == 1) || (ft_erreur2(str, base) == 1))
-			return (0);
 	while (base[size] != '\0')
 		size++;
 	i = ft_atoi(str, size, base);
+//	ft_putnbr_base(i, base);
 	return (i);
 }
 
 #include <stdio.h>
-int main(int argc, char **argv)
+int main(void)
 {
-	(void)argc;
-	printf("%d", ft_atoi_base(argv[1], argv[2]));
+	printf("%d", ft_atoi_base("-80000000", "0123456789abcdef"));
 	return (0);
 }
