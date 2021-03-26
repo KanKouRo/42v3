@@ -6,10 +6,11 @@
 /*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:02:10 by ngomis            #+#    #+#             */
-/*   Updated: 2021/03/23 16:01:20 by ngomis           ###   ########.fr       */
+/*   Updated: 2021/03/25 11:24:51 by ngomis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int ft_erreur2(char c, char *base);
 int		ft_atoi(char *str, unsigned int size, char *base)
 {
 	int i;
@@ -27,6 +28,8 @@ int		ft_atoi(char *str, unsigned int size, char *base)
 	nbr = 0;
 	while (str[i])
 	{
+		if (ft_erreur2(str[i], base) == 1)
+			return (nbr);
 		compt = 0;
 		while (str[i] != base[compt])
 			compt++;
@@ -63,21 +66,15 @@ int		ft_erreur(char *base)
 	return (0);
 }
 
-int		ft_erreur2(char *str, char *base)
+int		ft_erreur2(char c, char *base)
 {
 	int i;
-	int j;
-	
-	i = 0;
-	while (str[i] != '\0')
+
+	i = 0;	
+	while(c != base[i])
 	{
-		j = 0;
-		while(str[i] != base[j])
-		{
-			if (base[j] == '\0')
-				return (1);
-			j++;
-		}
+		if (base[i] == '\0')
+			return (1);
 		i++;
 	}
 	return (0);
@@ -89,7 +86,7 @@ int		ft_atoi_base(char *str, char *base)
 	unsigned int		size;
 
 	size = 0;
-	if ((ft_erreur(base) == 1) || (ft_erreur2(str, base) == 1))
+	if (ft_erreur(base) == 1)
 			return (0);
 	while (base[size] != '\0')
 		size++;
