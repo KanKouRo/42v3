@@ -1,28 +1,36 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_convert_base.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/23 09:51:07 by ngomis            #+#    #+#             */
-/*   Updated: 2021/02/23 10:39:48 by ngomis           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+int ft_verif_base(char c, char *base);
 
-#include <unistd.h>
-#include <stdlib.h>
-
-int		ft_in_base(char c, char *base);
-int		ft_baselen(char *base);
-int		ft_atoi_base(char *str, char *base);
-
-void	ft_putchar(char c)
+int		ft_atoi(char *str, unsigned int size, char *base)
 {
-	write(1, &c, 1);
+	int i;
+	int nbr;
+	int sign;
+	int compt;
+
+	i = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+		i++;
+	sign = 0;
+	while (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			sign = 1 - sign;
+	nbr = 0;
+	while (str[i])
+	{
+		if (ft_verif_base(str[i], base) == 1)
+			return (nbr);
+		compt = 0;
+		while (str[i] != base[compt])
+			compt++;
+		nbr = (nbr * size) + (str[i] - str[i]) + compt;
+		i++;
+	}
+	if (sign)
+		nbr *= -1;
+	return (nbr);
 }
 
-int		ft_erreur(char *base)
+int		ft_erreur_atoi_base(char *base)
 {
 	int i;
 	int n;
@@ -35,7 +43,9 @@ int		ft_erreur(char *base)
 	{
 		while (base[i] != '\0')
 		{
-			if (base[n] == base[i] || (base[n] == '-' || base[n] == '+'))
+			if (((base[n] == base[i] || (base[n] == '-' || base[n] == '+') || (base[i] == '-' || base[i] == '+'))
+						|| (base[n] >= 9 && base[n] <= 13) || base[n] == ' ')
+						|| (base[i] >= 9 && base[i] <= 13) || base[i] == ' ')
 				return (1);
 			i++;
 		}
@@ -45,63 +55,38 @@ int		ft_erreur(char *base)
 	return (0);
 }
 
-void	ft_putnbr_base(int nbr, char *base)
-{
-	unsigned int i;
-	unsigned int size;
-
-	size = 0;
-	i = 0;
-	while (base[size] != '\0')
-		size++;
-	if (ft_erreur(base) == 1)
-		return ;
-	if (nbr == -2147483648)
-	{
-		ft_putchar('-');
-		ft_putnbr_base(2, base);
-		ft_putnbr_base(147483648, base);
-	}
-	if (nbr < 0)
-	{
-		ft_putchar('-');
-		ft_putnbr_base(nbr * (-1), base);
-	}
-	if (nbr > 0)
-	{
-		ft_putnbr_base(nbr / size, base);
-		ft_putchar(base[nbr % size]);
-	}
-}
-
-int	ft_atoi(char *str)
+int		ft_verif_base(char c, char *base)
 {
 	int i;
-	int nbr;
-	int sign;
 
-	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+	i = 0;	
+	while(c != base[i])
+	{
+		if (base[i] == '\0')
+			return (1);
 		i++;
-	sign = 0;
-	while (str[i] == '-' || str[i] == '+')
-		if (str[i++] == '-')
-			sign = 1 - sign;
-	nbr = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-		nbr = (nbr * 10) + str[i++] - '0';
-	if (sign)
-		nbr *= -1;
-	return (nbr);
+	}
+	return (0);
 }
 
-char	*ft_convert_base(char *nbr, char* base_from, char *base_to)
+int		ft_atoi_base(char *str, char *base)
 {
-	int n;
-	int res;
+	long int			i;
+	unsigned int		size;
 
-	n = ft_atoi(char nbr);
-	if (!(res = ft_putnbr_base(n, base_to)));
-		return(NULL);
-	return(res);
+	size = 0;
+	if (ft_erreur_atoi_base(base) == 1)
+			return (0);
+	while (base[size] != '\0')
+		size++;
+	i = ft_atoi(str, size, base);
+	return (i);
+}
+
+#include <stdio.h>
+int main(int argc, char **argv)
+{
+	(void)argc;
+	printf("%d", ft_atoi_base(argv[1], argv[2]));
+	return (0);
 }

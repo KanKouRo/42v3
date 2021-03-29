@@ -1,61 +1,21 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_convert_base2.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/23 10:31:23 by ngomis            #+#    #+#             */
-/*   Updated: 2021/02/23 10:31:28 by ngomis           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-int		ft_in_base(char c, char *base)
+void	ft_putnbr_base(int nbr, char *base)
 {
-	int i;
+	unsigned int	i;
+	int				size;
 
-	i = -1;
-	while (base[++i])
-		if (c == base[i])
-			return (i);
-	return (-1);
-}
-
-int		ft_baselen(char *base)
-{
-	int size;
-
-	size = -1;
-	while (base[++size])
-		if (base[size] == '+' || base[size] == '-' || base[size] == ' '
-			|| ft_in_base(base[size], base + size + 1) >= 0
-			|| (base[size] >= 9 && base[size] <= 13))
-			return (0);
-	return (size);
-}
-
-int		ft_atoi_base(char *str, char *base)
-{
-	int i;
-	int n;
-	int negative;
-	int size;
-
-	if ((size = ft_baselen(base)) < 2)
-		return (0);
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	negative = 0;
-	while (*str == '-' || *str == '+')
-		if (*str++ == '-')
-			negative = 1 - negative;
-	n = 0;
-	while ((i = ft_in_base(*str, base)) >= 0)
+	size = 0;
+	i = 0;
+	while (base[size] != '\0')
+		size++;
+	if (ft_erreur(base) == 1)
+		return ;
+	if (nbr < 0)
 	{
-		n = n * size + i;
-		str++;
+		ft_putchar('-');
+		ft_putnbr(-nbr, base, size);
 	}
-	if (negative)
-		n *= -1;
-	return (n);
+	else
+	{
+		ft_putnbr(nbr, base, size);
+	}
 }
