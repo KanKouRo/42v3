@@ -5,30 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/21 16:34:53 by ngomis            #+#    #+#             */
-/*   Updated: 2021/02/25 10:09:51 by ngomis           ###   ########.fr       */
+/*   Created: 2021/03/24 15:51:18 by ngomis            #+#    #+#             */
+/*   Updated: 2021/03/24 17:27:33 by ngomis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int		ft_ultimate_range(int **range, int min, int max)
+int	ft_ultimate_range(int **range, int min, int max)
 {
 	int i;
+	int ems;
 
 	i = 0;
+	*range = NULL;
 	if (min >= max)
-	{
-		*range = NULL;
 		return (0);
-	}
 	if (!(*range = malloc(sizeof(int) * (max - min))))
 		return (-1);
-	max -= min;
-	while (i < max)
+	ems = (max - min);
+	while (i < ems)
 	{
-		(*range)[i] = min + i;
+		(*range)[i] = min;
+		min++;
 		i++;
 	}
-	return (max);
+	return (i);
 }

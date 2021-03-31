@@ -5,33 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/20 14:18:28 by ngomis            #+#    #+#             */
-/*   Updated: 2021/02/25 09:15:03 by ngomis           ###   ########.fr       */
+/*   Created: 2021/03/24 10:35:04 by ngomis            #+#    #+#             */
+/*   Updated: 2021/03/28 16:51:00 by ngomis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 
 char	*ft_strdup(char *src)
 {
-	char	*str;
-	int		j;
+	char	*dest;
+	int		size;
 	int		i;
 
-	j = 0;
-	while (src[j] != '\0')
-		j++;
-	str = malloc(sizeof(str) * (j + 1));
-	if (str == NULL)
-		return (0);
+	size = 0;
+	while (src[size] != '\0')
+		size++;
+	if (!(dest = malloc(sizeof(char) * size + 1)))
+		return (NULL);
 	i = 0;
 	while (src[i] != '\0')
 	{
-		str[i] = src[i];
+		dest[i] = src[i];
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
+	dest[i] = '\0';
+	return (dest);
 }

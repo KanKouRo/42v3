@@ -5,57 +5,83 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/23 10:31:23 by ngomis            #+#    #+#             */
-/*   Updated: 2021/02/23 10:31:28 by ngomis           ###   ########.fr       */
+/*   Created: 2021/03/31 10:35:25 by ngomis            #+#    #+#             */
+/*   Updated: 2021/03/31 10:35:51 by ngomis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_in_base(char c, char *base)
+int		ft_strlen(char *str)
 {
-	int i;
+	int		i;
 
-	i = -1;
-	while (base[++i])
-		if (c == base[i])
-			return (i);
-	return (-1);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-int		ft_baselen(char *base)
+void	ft_rev_tab(char *tab, int size)
 {
-	int size;
+	int		i;
+	int		swap;
 
-	size = -1;
-	while (base[++size])
-		if (base[size] == '+' || base[size] == '-' || base[size] == ' '
-			|| ft_in_base(base[size], base + size + 1) >= 0
-			|| (base[size] >= 9 && base[size] <= 13))
-			return (0);
-	return (size);
-}
-
-int		ft_atoi_base(char *str, char *base)
-{
-	int i;
-	int n;
-	int negative;
-	int size;
-
-	if ((size = ft_baselen(base)) < 2)
-		return (0);
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	negative = 0;
-	while (*str == '-' || *str == '+')
-		if (*str++ == '-')
-			negative = 1 - negative;
-	n = 0;
-	while ((i = ft_in_base(*str, base)) >= 0)
+	i = 0;
+	while (i < size / 2)
 	{
-		n = n * size + i;
-		str++;
+		swap = tab[size - 1 - i];
+		tab[size - i - 1] = tab[i];
+		tab[i] = swap;
+		i++;
 	}
-	if (negative)
-		n *= -1;
-	return (n);
+}
+
+int		i_base(char c, char *base)
+{
+	int		i;
+
+	i = 0;
+	while (base[i] && base[i] != c)
+		i++;
+	return (i);
+}
+
+int		is_base(char c, char *base)
+{
+	int		i;
+
+	i = 0;
+	while (base[i])
+	{
+		if (base[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int		check_base(char *base)
+{
+	int		i;
+	int		j;
+	int		len;
+
+	i = 0;
+	len = ft_strlen(base);
+	if (len == 0 || len == 1)
+		return (0);
+	while (base[i])
+	{
+		j = i + 1;
+		if (base[i] == '-' || base[i] == '+' || base[i] < 32
+				|| base[i] > 127 || base[i] == ' ')
+			return (0);
+		while (base[j])
+		{
+			if (base[i] == base[j])
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }

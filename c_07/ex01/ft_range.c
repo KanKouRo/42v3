@@ -5,30 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngomis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/21 14:12:25 by ngomis            #+#    #+#             */
-/*   Updated: 2021/02/25 09:49:44 by ngomis           ###   ########.fr       */
+/*   Created: 2021/03/24 11:30:59 by ngomis            #+#    #+#             */
+/*   Updated: 2021/03/24 12:51:15 by ngomis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int		*ft_range(int min, int max)
+int	*ft_range(int min, int max)
 {
-	int *tab;
 	int i;
+	int *tab;
+	int n;
 
 	tab = NULL;
-	i = 0;
 	if (min >= max)
 		return (tab);
-	tab = malloc(sizeof(int) * (max - min));
-	if (tab == NULL)
-		return (0);
-	while (min < max)
+	if (!(tab = malloc(sizeof(int) * (max - min))))
+		return (NULL);
+	i = 0;
+	n = min;
+	while (i < (max - min))
 	{
-		tab[i] = min;
+		tab[i] = n;
+		n++;
 		i++;
-		min++;
 	}
 	return (tab);
 }
